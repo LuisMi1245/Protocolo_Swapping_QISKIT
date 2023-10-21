@@ -1,0 +1,247 @@
+\documentclass[12pt]{article}
+%Some packages I commonly use.
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{framed}
+\usepackage{multicol}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{physics}
+\usepackage{amsfonts}
+\usepackage{enumerate}
+\usepackage{cancel}
+\usepackage[utf8]{inputenc}
+\usepackage[top=.5in,bottom=1in, left=.7in, right=.7in]{geometry}
+\spanishdecimal{.}
+%A bunch of definitions that make my life easier
+
+\title{{\Large \textbf{Taller - Teoría de Probabilidad}}}
+\author{Jesús Manuel Gallego Mercado y\\ 
+Luis Miguel Patiño Buendía\\\\
+\small{Dpto. de Física}\\
+\small{Facultad de Ciencias Básicas}\\
+\small{Universidad de Córdoba, Montería.}
+}
+\date{\small{\today}}
+%JESÚS G: 1,3,5,7,9,11,13,15,17
+%LUIS M: 2,4,6,8,10,12,14,16,18
+\newcommand{\up}[1]{^{#1}}
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item ¿Cuántas palabras de 4 letras (que tengan o no sentido) se pueden formar con las letras a, b, c, d, e y f?\\
+    
+    \textbf{Respuesta:} 
+    El conjunto $\{a,b,c,d,e,f\}$ tiene $n=6$ elementos. Usaremos la permutación de la forma:
+    \begin{equation}
+        P\up{n}_{r} = \frac{n!}{(n-r)!}
+    \end{equation}
+    ya que el orden cuenta en este caso.
+    \begin{equation}
+        P\up{6}_{4} = \frac{6!}{(6-4)!} = 360 \quad \text{Combinaciones posibles}
+    \end{equation}
+    
+    \item Se lanzan 10 dados. ¿Cuál es la probabilidad de obtener exactamente tres seis?\\
+    
+      \textbf{Respuesta:} 
+      Utilizaremos la distribución binomial dado que el experimento se repite $N=10$ veces (son relativamente muchas). Y el resultado A se produzca $n=3$ veces y donde $p=1/6$ la probabilidad de que caiga un $6$ en un dado, la probabilidad entonces es:
+    
+    \begin{gather}
+        P_{10}(3, 1/6) = \frac{10!}{(10-3)!3!}\qty(\frac{1}{6})\up{3}\qty(1-\frac{1}{6})\up{10-3}\\
+         P_{10}(3, 1/6) = \frac{390625}{2519424}\approx 0.155
+    \end{gather}
+    
+    
+    \item Se lanzan tres dados. Encontrar la probabilidad de que:
+    \begin{itemize}
+        \item Salga 6 en todos.\\
+        
+        \textbf{Respuesta:}
+          \begin{gather}
+        P_{3}(3, 1/6) = \frac{3!}{(3-3)!3!}\qty(\frac{1}{6})\up{3}\qty(1-\frac{1}{6})\up{3-3}\\
+         P_{3}(3, 1/6) = \qty(\frac{1}{6})\up{3} =  \frac{1}{216}
+    \end{gather}
+        
+        \item Los puntos obtenidos sumen 7. 
+        
+        \textbf{Respuesta:} Las maneras de sumar 7 con 3 dados son las siguientes:
+        
+        \begin{gather}
+            3+2+2 = 7\\
+            3+3+1 = 7\\
+            4+2+1 = 7\\
+            5+1+1 = 7
+        \end{gather}
+        Pero el orden importa, luego debemos permutar los 3 dígitos de cada suma para encontrar el total de formas que suman 7 con 3 dados. Usaremos una permutación con repetición por cada fila de la forma $P_n\up{x,y,z}$ donde $n=3$ es el tamaño de la muestra y $x,y,z$ es el número de veces que se repite un dígito $x$, $y$ o $z$. Luego, todos los ordenamientos posibles son:
+        
+        \begin{gather}
+            P_3\up{1,2} + P_3\up{2,1} +  P_3\up{1,1,1} +  P_3\up{1,2} = 3 + 3 + 6 + 3 = 15 \,\, \text{Casos favorables de 216}
+        \end{gather}
+           La probabilidad es entonces: $P = 15/216$
+           
+        \item Salga 1 en dos dados.
+        
+        \textbf{Respuesta:} \begin{gather}
+            P_3(2, 1/6) = \frac{3!}{1!2!}\qty(\frac{1}{6})\up{2}\qty(1-1/6) = 5/72 \approx 0.070
+        \end{gather}
+        
+    \end{itemize}
+        
+    \item Una clase consta de 12 hombres y 22 mujeres; la mitad de los hombres y la mitad de las mujeres tienen los ojos castaños. Determinar la probabilidad de que una persona elegida al azar sea un hombre o tenga los ojos castaños.\\
+    
+        \textbf{Respuesta:}
+   Definamos el conjunto de hombres y mujeres: $\qty{12\text{hombre}, 22\text{mujer}}$ con $N_1=34$ elementos. Y el conjunto de personas con o sin ojos castaños: $\qty{17\text{castaño}, 17\text{normal}}$ con $N_2=34$ elementos. La probabilidad de elegir una persona que sea hombre o tenga los ojos de color castaño es:
+   
+   \begin{gather}
+       P(h\, \cup\, c) = P(h) + P(c) - P(h \, \cap \, c)\\
+       = P(h) + P(c) - P(h)P(c|h)\\
+       = \frac{12}{34} + \frac{17}{34} - \qty(\frac{12}{34})\qty(\frac{1}{2}) =\frac{23}{34}
+   \end{gather}
+   
+      %every node/.style={align=center}
+      %[grow=right,sibling distance=8em,level distance=5em]
+   \begin{center}
+     \begin{tikzpicture}
+     [sibling distance=10em]
+      \node{Probabilidad}
+       child{node{Hombre: $\frac{12}{34}$} 
+           child{node{Castaño: $\frac{1}{2}$}}
+           child{node [xshift=-3em] {Normal: $\frac{1}{2}$}} 
+           }
+       child{node{Mujer: $\frac{22}{34}$}
+           child{node [xshift=3em] {Castaño: $\frac{1}{2}$}}
+           child{node{Normal: $\frac{1}{2}$}}
+           };
+    \end{tikzpicture}
+    \end{center}
+    
+    \item La urna A tiene 7 bolas blancas y 3 negras, y la urna B, 5 blancas y 5 negras. Se extrae al azar una bola de A y se la coloca en B. A continuación se extrae al azar una bola de B. Encuentre la probabilidad de que ambas bolas extraídas sean negras.\\
+    
+    \textbf{Respuesta:}
+    La urna $A=\qty{7\text{blanca}, 3\textbf{negra}}$ y la urna $B=\qty{5\text{blanca}, 5\textbf{negra}}$, la probabilidad de que ambas bolas extraídas sean negras:
+    
+    \begin{gather}
+        P(\text{Negra en A}\, \text{y} \, \text{Negra en B}) = P_A(N)*P_B(N|N_A)
+    \end{gather}
+    
+    Por medio de un diagrama de árbol determinamos estas probabilidades:
+    
+       \begin{center}
+     \begin{tikzpicture}
+     [sibling distance=10em]
+      \node{$P_A$}
+       child{node{$P_A(Blanca)$: $\frac{7}{10}$} 
+           child{node{$P_B(Negra)$: $\frac{5}{11}$}}
+        }
+       child{node{$P_A(Negra)$: $\frac{3}{10}$}
+           child{node{$P_B(Negra)$: $\frac{6}{11}$}}
+        };
+    \end{tikzpicture}
+    \end{center}
+    De acuerdo con el diagrama, optamos por la rama derecha, de modo que:
+    
+       \begin{gather}
+        P(\text{Negra en A}\, \text{y} \, \text{Negra en B}) = \qty(\frac{3}{10})\qty(\frac{6}{11}) = \frac{9}{55} 
+    \end{gather}
+    
+    
+    \item Cuál es la probabilidad de: (a) Ganarse el baloto y (b) Cuál sería la probabilidad de ganárselo si importara el orden de las balotas?\\
+    
+    \textbf{Respuesta:} (a) Primero, tenemos 5 pelotas numeradas del 1 al 43. Se puede inferir de éste inciso que el orden no cuenta o no importa, por tanto, usamos una combinación para determinar la cantidad de ordenamientos:
+    
+    \begin{gather}
+        C_r\up{n}= \frac{n!}{r!(n-r)!}\\
+        C_{5}\up{43} = \frac{43!}{5!(43-5)!} = 962598 \quad \text{Combinaciones posibles}
+    \end{gather}
+    
+    Ahora debemos tener en cuenta la súper balota (también llamada la \textit{serie}) numerada de 1 a 16. Por tanto: $962598*16=15401568$ son todas las formas de jugar el baloto. Luego, la probabilidad de ganar el baloto es:
+    \begin{gather}
+        P(ganar) = \frac{1}{15401568} \approx 6.49*10\up{-8}
+    \end{gather}
+    
+    (b) Si el orden importa, usamos permutación sin repetición (el baloto dice que no se pueden repetir balotas):
+    
+     \begin{gather}
+        P_r\up{n}= \frac{n!}{(n-r)!}\\
+        P_{5}\up{43} = \frac{43!}{(43-5)!} = 115511760 \quad \text{Permutaciones posibles}
+    \end{gather}
+    Y con la superbalota: $115511760*16=1848188160$, de manera que la probabilidad es:
+    
+      \begin{gather}
+        P(ganar) = \frac{1}{1848188160} \approx 5.41*10\up{-10}
+    \end{gather}
+    Es decir, es menos probable ganarse el baloto si el orden importara.
+    
+    \item Halle la probabilidad de que al levantar unas fichas de dominó se obtenga un número de puntos mayor que 9 o que sea múltiplo de 4.\\
+    
+    \textbf{Respuesta:} Un dominó tiene 28 fichas. El conjunto que me define la suma de puntos de cada ficha de manera individual es: $\qty{0,1,2,3,4,5,6,2,3,4,5,6,7,4,5,6,7,8,6,7,8,9,8,9,10,10,11,12}$.
+    
+    El conjunto de puntos sumados que me dan un múltiplo de 4 son: $\qty{0,4,8,12}$, y el conjunto de los que son mayores que 9: $\qty{10,11,12}$. De modo la probabilidad de que al levantar una sola ficha (consultamos esto con el profesor ya que el inciso no dejó claro cuántas fichas se debían levantar) la suma de puntos sea múltiplo de 4 o mayor que 9 es:
+    
+    \begin{gather}
+        P(\qty{4n}\cup\qty{n>9})= P(4n) + P(n>9) - P(4n \, \cap n>9)\\
+        = \frac{4}{28}+\frac{8}{28}-\frac{1}{28} = \frac{11}{28}
+    \end{gather}
+    
+    \item Una empresa electrónica observa que el número de componentes que fallan antes de cumplir 100 horas de funcionamiento es una variable aleatoria de Poisson. Si el número promedio de estos fallos es ocho.
+    
+        \textbf{Respuesta:} El inciso nos sugiere usar la distribución de Poisson, donde $n$ es el número de componentes que fallan, $N$ es el número de horas y $\lambda = N*p$, el promedio de componentes que fallan. Para obtener la probabilidad $p$:
+        \begin{gather}
+        p = \frac{\lambda}{N} = 8/100 
+        \end{gather}
+        
+    \begin{itemize}
+    
+        \item ¿Cuál es la probabilidad de que falle un componente en 25 horas?
+   
+        \textbf{Respuesta:} La probabilidad de que falle un solo componente en $N=25$ horas, con $\lambda=(25)*\qty(\frac{8}{100})=2$, es:
+        \begin{gather}
+        P_p (1, 2) = \frac{2\up{1}}{1!}e\up{-2} = \frac{2}{e\up{2}} \approx 0.271
+        \end{gather}
+   
+        \item ¿Y de que fallen no más de dos componentes en 50 horas?
+         
+         \textbf{Respuesta:} En este caso $N=50$ horas, sin embargo proponen que no fallen más de dos componentes, es decir, que fallen 2 ó 1 ó ningún componente. Luego $\lambda = (50)*\qty(\frac{8}{100})=4$, y la probabilidad es:
+         
+         \begin{gather}
+             P_p(\qty{n=0,1,2}, 4) = P_p(0, 4)+P_p(1, 4)+P_p(2, 4)\\
+             = e\up{-4}\qty(\frac{4\up{0}}{0!}+\frac{4\up{1}}{1!}+\frac{4\up{2}}{2!}) = 13*e\up{-4} \approx 0.238
+         \end{gather}
+         
+        \item ¿Cuál es la probabilidad de que fallen por lo menos diez en 125 horas? 
+        
+        \textbf{Respuesta:} En este caso, $N=125$ horas y se considera que fallen al menos 10 (o podrían ser más de 10) componentes. Luego $\lambda = (125)*\qty(\frac{8}{100})=10$. Sabemos que la suma de todas las probabilidades es igual a la unidad, luego:
+        
+        \begin{gather}
+            P_p(\qty{n=0,1,2,...,9}, 10) + P_p(\qty{n=10,11,...},10) = 1\\
+            \Rightarrow P_p(\qty{n=10,11,...},10) = 1 - \qty(P_p(0,10)+P_p(1,10)+...+P_p(9,10))\\
+            = 1-e\up{-10}\qty(1+\frac{10\up{1}}{1!}+\frac{10\up{2}}{2!}+\frac{10\up{3}}{3!}+\frac{10\up{4}}{4!}+\frac{10\up{5}}{5!}+\frac{10\up{6}}{6!}+\frac{10\up{7}}{7!}+\frac{10\up{8}}{8!}+\frac{10\up{9}}{9!})\\
+            = 1 - e\up{-10}\qty(\frac{5719087}{567}) \approx 0.542
+        \end{gather}
+    \end{itemize}
+    
+    \item Calcular:
+    \begin{enumerate}[(a)]
+        \item Calcular la probabilidad de obtener un 2 ó un 5 al lanzar un dado.
+        
+        \textbf{Respuesta:} $P(2 \,o\, 5) = P(2) + P(5) = 1/6 +1/6 = 1/3$ ya que es excluyente.
+        
+        \item la probabilidad de obtener un 6 al tirar un dado sabiendo que ha salido par.  
+        
+        \textbf{Respuesta:} Si sabemos que ha salido par, los posibles resultados son: $\qty{2,4,6}$, luego $P(6) = 1/3$.
+        
+        \item  la probabilidad de obtener un múltiplo de 2 ó un 6 al lanzar un dado. 
+        
+         \textbf{Respuesta:} Los posibles múltiplos de 2 son: $\qty{2,4,6}$ ó $\qty{6}$, así, la probabilidad:
+         
+        \begin{gather}
+        P(\qty{2,4,6}\,\cup\,\qty{6}) = P(\qty{2,4,6}) + P(6) - P(\qty{2,4,6}\,\cap\,\qty{6})\\
+        = \frac{3}{6} + \frac{1}{6} - \frac{1}{6} = 3/6 = 1/2
+        \end{gather}
+    \end{enumerate}
+\end{enumerate}
+\end{document}
